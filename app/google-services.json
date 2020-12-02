@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "826047567663",
+    "firebase_url": "https://gogogacho.firebaseio.com",
+    "project_id": "gogogacho",
+    "storage_bucket": "gogogacho.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:826047567663:android:85c538db177758177df3da",
+        "android_client_info": {
+          "package_name": "edu.ucsb.cs.cs184.gogogacho"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "826047567663-nrafptiaota19gif54unkqqe8rfh00re.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9jTvJnSLV9hT_GiKjU-K0KwTfipLgVwc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "826047567663-nrafptiaota19gif54unkqqe8rfh00re.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
