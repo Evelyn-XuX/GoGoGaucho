@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.IgnoreExtraProperties;
@@ -28,16 +29,17 @@ public class SignupActivity extends AppCompatActivity {
     private Button loginButton;
     private Integer count=0;
 
-    @IgnoreExtraProperties
-    class User{
-        String email = "";
-        String password = "";
 
-        public User(String email, String pw) {
-            this.email = email;
-            password = pw;
-        }
-    }
+//    @IgnoreExtraProperties
+//    class User{
+//        String email = "";
+//        String password = "";
+//
+//        public User(String email, String pw) {
+//            this.email = email;
+//            password = pw;
+//        }
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +54,8 @@ public class SignupActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance().getReference();
 
-        signupButton.setOnClickListener(task->signup());
 
+        signupButton.setOnClickListener(task->signup());
         loginButton.setOnClickListener(task->doSwitch());
 
 
@@ -77,16 +79,24 @@ public class SignupActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-//                                count++;
-//                                String id = count.toString();
-//                                writeNewUser(id,email,pw);
+
+                                /*
+                                TODO: Store account information into Firebase
+                                */
+
+                                FirebaseUser user = task.getResult().getUser();
+                                writeNewUser(user.getUid(),email);
+
+
+
                                 Context context = getApplicationContext();
                                 CharSequence text = "Successfully Sign Up";
                                 int duration = Toast.LENGTH_SHORT;
                                 Toast toast = Toast.makeText(context, text, duration);
                                 toast.show();
 
-                                Intent intent = new Intent(SignupActivity.this, MainActivity.class);
+                                //sign up == it's new user, so switch to MajorActivity to select major after sign up
+                                Intent intent = new Intent(SignupActivity.this, MajorActivity.class);
                                 startActivity(intent);
                                 finish();
 
@@ -104,9 +114,9 @@ public class SignupActivity extends AppCompatActivity {
 
     }
 
-    private void writeNewUser(String userId, String email, String pw){
-        User newuser = new User(email,pw);
-        database.child("users").child(userId).setValue(newuser);
+    private void writeNewUser(String userId, String email){
+        User newUser = new User(email);
+        database.child("users").child(userId).setValue(newUser);
     }
 
     private void doSwitch(){

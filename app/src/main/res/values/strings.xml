@@ -18,4 +18,21 @@
     <string name="enter_email">Enter Email</string>
     <string name="sign_out">Sign Out</string>
     <string name="sideshow">SideShow</string>
+
+    <string name="college1">College of Creative Study</string>
+    <string name="college2">College of Engineering</string>
+    <string name="college3">College of Letters and Science</string>
+
+    <string-array name="c1">
+        <item>Art</item>
+        <item>Biology</item>
+        <item>Chemistry &amp; BioChemistry</item>
+        <item>Computing</item>
+        <item>Mathematics</item>
+        <item>Music Composition</item>
+        <item>Physics</item>
+        <item>Writing &amp; Literature</item>
+    </string-array>
+
+
 </resources>

@@ -9,6 +9,11 @@ import android.view.View;
 import android.view.Menu;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
@@ -28,6 +33,7 @@ import androidx.appcompat.widget.Toolbar;
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
+    private GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth auth;
     private Context context;
     private DatabaseReference database;
@@ -52,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
             Toast toast = Toast.makeText(c, text, duration);
             toast.show();
         }
+
+
 
 
 
@@ -119,7 +127,20 @@ public class MainActivity extends AppCompatActivity {
     private void logout(){
         FirebaseAuth.getInstance().signOut();
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-        startActivity(intent);
+        //startActivity(intent);
+        startActivityForResult(intent, 2);
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        // check if the request code is same as what is passed  here it is 2
+        if(requestCode==2)
+        {
+            mGoogleSignInClient.signOut();
+        }
     }
 
 
