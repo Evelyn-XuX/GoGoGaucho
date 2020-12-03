@@ -59,7 +59,6 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(task->login());
         signupButton.setOnClickListener(task->doSwitch());
 
-
         createRequest();
 
         googleLogin.setOnClickListener(new View.OnClickListener() {
@@ -124,7 +123,6 @@ public class LoginActivity extends AppCompatActivity {
                             finish();
                         } else {
                             // If sign in fails, display a message to the user.
-
                             Context context = getApplicationContext();
                             CharSequence text = "Google Sign In Fail";
                             int duration = Toast.LENGTH_SHORT;
