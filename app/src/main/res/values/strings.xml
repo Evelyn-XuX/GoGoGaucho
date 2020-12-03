@@ -34,5 +34,15 @@
         <item>Writing &amp; Literature</item>
     </string-array>
 
+    <string-array name="c2">
+        <item>Chemical Engineering</item>
+        <item>Computer Engineering</item>
+        <item>Computer Science</item>
+        <item>Electrical Engineering</item>
+        <item>Mechanical Engineering</item>
+    </string-array>
+
+
+
 
 </resources>

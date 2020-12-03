@@ -87,8 +87,6 @@ public class SignupActivity extends AppCompatActivity {
                                 FirebaseUser user = task.getResult().getUser();
                                 writeNewUser(user.getUid(),email);
 
-
-
                                 Context context = getApplicationContext();
                                 CharSequence text = "Successfully Sign Up";
                                 int duration = Toast.LENGTH_SHORT;

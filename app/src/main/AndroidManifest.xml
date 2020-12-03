@@ -22,6 +22,15 @@
         <activity android:name=".SignupActivity"/>
         <activity android:name=".LoginActivity"/>
         <activity android:name=".MajorActivity"/>
+
+        <activity android:name=".McourselistActivity"
+            android:parentActivityName=".MajorActivity">
+            <!-- The meta-data tag is required if you support API level 15 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MajorActivity" />
+        </activity>
+
     </application>
 
 </manifest>
