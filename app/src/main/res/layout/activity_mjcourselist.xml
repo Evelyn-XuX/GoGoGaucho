@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <ExpandableListView
-        android:id="@+id/expandable_ListView"
+        android:id="@+id/expandable_ListView_majorCourse"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
