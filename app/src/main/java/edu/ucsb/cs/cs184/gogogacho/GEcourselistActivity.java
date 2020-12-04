@@ -1,4 +1,6 @@
 package edu.ucsb.cs.cs184.gogogacho;
 
-public class GEcourselistActivity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class GEcourselistActivity extends AppCompatActivity {
 }

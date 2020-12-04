@@ -63,21 +63,20 @@ public class MajorActivity extends AppCompatActivity {
             list2.add(item);
         }
 
-
-
         listItem.put(listGroup.get(0),list1);
         listItem.put(listGroup.get(1),list2);
+
+
+
+        /*
+        TODO: import the names of departments in college of letter and science
+              （strings.xml里手动输入？）
+         */
         listItem.put(listGroup.get(2),list1);
+
+
         adapter.notifyDataSetChanged();
 
-        expandableListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("item click","true");
-                Log.d("position", Integer.toString(position));
-                Log.d("id", Long.toString(id));
-            }
-        });
 
 
     }

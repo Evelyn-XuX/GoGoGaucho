@@ -20,6 +20,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.IgnoreExtraProperties;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SignupActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private DatabaseReference database;
@@ -83,6 +86,8 @@ public class SignupActivity extends AppCompatActivity {
                                 /*
                                 TODO: Store account information into Firebase
                                 */
+//                                List<String> mList = new ArrayList<>();
+//                                List<String> geList = new ArrayList<>();
 
                                 FirebaseUser user = task.getResult().getUser();
                                 writeNewUser(user.getUid(),email);
@@ -115,6 +120,7 @@ public class SignupActivity extends AppCompatActivity {
     private void writeNewUser(String userId, String email){
         User newUser = new User(email);
         database.child("users").child(userId).setValue(newUser);
+
     }
 
     private void doSwitch(){

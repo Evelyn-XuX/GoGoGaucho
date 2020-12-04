@@ -15,10 +15,8 @@ public class User {
     public User(String email){
         this.email = email;
         major="";
-        List<String> mList = new ArrayList<>();
-        List<String> geList = new ArrayList<>();
-        majorCourses = mList;
-        geCourses = geList;
+        majorCourses = new ArrayList<>();
+        geCourses = new ArrayList<>();
     }
 
     public User(String email, String major, List<String> majorCourses, List<String> geCourses){
@@ -39,6 +37,11 @@ public class User {
     public void setGECourseList(List<String> list){
         geCourses = list;
     }
+
+    public List<String> getMajorCourses(){return majorCourses;}
+
+    public List<String> getGeCourses(){return geCourses;}
+
 
 
 

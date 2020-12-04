@@ -43,6 +43,11 @@
     </string-array>
 
 
+    <string name="require">Major Require</string>
+    <string name="elective">Major Elective</string>
+    <string name="science">Science Elective</string>
+
+
 
 
 </resources>

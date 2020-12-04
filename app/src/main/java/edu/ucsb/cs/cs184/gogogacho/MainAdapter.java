@@ -2,6 +2,7 @@ package edu.ucsb.cs.cs184.gogogacho;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -98,6 +99,9 @@ public class MainAdapter extends BaseExpandableListAdapter {
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /*
+                TODO: (OPTIONAL) change background color when click
+                */
                 FirebaseUser user = auth.getCurrentUser();
                 String email = user.getEmail();
                 database.child("users").child(user.getUid()).child("major").setValue(child);
