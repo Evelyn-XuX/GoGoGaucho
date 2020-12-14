@@ -1,2 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <style name="edittext_style" parent="Widget.AppCompat.EditText">
+        <item name="android:background">@color/white</item>
+    </style>
+    <style name="primary_btn" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:background">@color/primary</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:radius">20dp</item>
+    </style>
+    <style name="secondary_btn" parent="Widget.AppCompat.Button">
+        <item name="android:background">@color/white</item>
+        <item name="android:textColor">@color/black</item>
+
+
+
+    </style>
+
+</resources>
