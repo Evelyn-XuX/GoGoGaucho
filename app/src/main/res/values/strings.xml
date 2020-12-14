@@ -10,14 +10,16 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
-    <string name="sign_in_with_google">Sign In with Google</string>
-    <string name="sign_up">Sign Up</string>
+    <string name="sign_in_with_google">Sign In with </string>
+    <string name="sign_up">Create an account</string>
     <string name="or">or</string>
     <string name="sign_in">Sign In</string>
     <string name="enter_password">Enter Password</string>
     <string name="enter_email">Enter Email</string>
     <string name="sign_out">Sign Out</string>
     <string name="sideshow">SideShow</string>
+    <string name="account">Already have an account?</string>
+    <string name="no_account">Don\'t have an account?</string>
 
     <string name="college1">College of Creative Study</string>
     <string name="college2">College of Engineering</string>
@@ -46,8 +48,8 @@
     <string name="require">Major Require</string>
     <string name="elective">Major Elective</string>
     <string name="science">Science Elective</string>
-
-
+    <string name="google_icon">Google Icon</string>
+    <string name="app_logo">App Logo</string>
 
 
 </resources>
