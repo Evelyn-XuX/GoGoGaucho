@@ -99,6 +99,7 @@
     <string name="units">units</string>
 
     <string name="ge_title">Please select General Education courses taken</string>
-
+    <string name="major_title">What is your major?</string>
+    <string name="next">NEXT</string>
 
 </resources>
