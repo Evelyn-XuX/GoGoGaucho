@@ -108,12 +108,16 @@ public class MajorActivity extends AppCompatActivity {
               （strings.xml里手动输入？）
          */
         List<String> list3 = new ArrayList<>();
-
+        //store the names of department in COE into list2
+        array = getResources().getStringArray(R.array.c3);
+        for(String item : array){
+            list3.add(item);
+        }
 
 
         listItem.put(listGroup.get(0),list1);
         listItem.put(listGroup.get(1),list2);
-        listItem.put(listGroup.get(2),list1);
+        listItem.put(listGroup.get(2),list3);
 
         adapter.notifyDataSetChanged();
 

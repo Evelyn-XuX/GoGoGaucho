@@ -129,7 +129,6 @@ public class LoginActivity extends AppCompatActivity {
         auth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
 
-
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
@@ -184,7 +183,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private boolean isExist(String userId){
-        final boolean[] result = {true};
+        final boolean[] result = {false};
         database.child("users").child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

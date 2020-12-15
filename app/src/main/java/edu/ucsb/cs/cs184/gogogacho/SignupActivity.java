@@ -86,8 +86,6 @@ public class SignupActivity extends AppCompatActivity {
                                 /*
                                 TODO: Store account information into Firebase
                                 */
-//                                List<String> mList = new ArrayList<>();
-//                                List<String> geList = new ArrayList<>();
 
                                 FirebaseUser user = task.getResult().getUser();
                                 writeNewUser(user.getUid(),email);
