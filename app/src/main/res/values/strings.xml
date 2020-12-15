@@ -66,6 +66,11 @@
     <string name="area_f">Area F</string>
     <string name="area_g">Area G</string>
     <string name="literature">Literature</string>
+    <string name="major_courses">Major Courses</string>
+    <string name="major_electives">Major Electives</string>
+    <string name="you_have_completed">You have completed</string>
+    <string name="_123">123</string>
+    <string name="units">units</string>
 
 
 </resources>
