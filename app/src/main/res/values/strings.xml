@@ -50,6 +50,22 @@
     <string name="science">Science Elective</string>
     <string name="google_icon">Google Icon</string>
     <string name="app_logo">App Logo</string>
+    <string name="policy">By continuing, you agree to our Terms of Service and Private Policy</string>
+    <string name="major_requirement">Major Requirement</string>
+    <string name="general_education">General Education</string>
+    <string name="welcome">Hello, Student</string>
+    <string name="social_science">Social Science</string>
+    <string name="area_d">Area D</string>
+    <string name="completed">Completed</string>
+    <string name="rocket_launch">Rocket Launch</string>
+    <string name="enter_button">Enter Button</string>
+    <string name="area_icon">Area Icon</string>
+    <string name="area_e">Area E</string>
+    <string name="culture_thought">Culture and Thought</string>
+    <string name="the_arts">The Arts</string>
+    <string name="area_f">Area F</string>
+    <string name="area_g">Area G</string>
+    <string name="literature">Literature</string>
 
 
 </resources>
