@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 
 import androidx.annotation.NonNull;
@@ -37,6 +38,7 @@ public class McourselistActivity extends AppCompatActivity {
     CourseAdapter adapter;
 
     private User student;
+    private Button next;
 
 
     @Override
@@ -48,6 +50,7 @@ public class McourselistActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance().getReference();
 
         expandableListView = findViewById(R.id.expandable_ListView_majorCourse);
+        next = findViewById(R.id.button5);
         listGroup = new ArrayList<>();
         listItem = new HashMap<>();
         mMajorCourse = new ArrayList<>();
@@ -72,6 +75,7 @@ public class McourselistActivity extends AppCompatActivity {
         student.setMajor(major);
 
         initListData();
+        next.setOnClickListener(task->nextGE());
 
         expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
@@ -84,12 +88,19 @@ public class McourselistActivity extends AppCompatActivity {
                 
                 Course selected_course = (Course) adapter.getChild(groupPosition,childPosition);
                 selected_course.setTaken(!selected_course.getTaken());
+                next.setOnClickListener(task->nextGE());
 
                 return true;
             }
         });
 
     }
+    private void nextGE(){
+        Intent intent = new Intent(McourselistActivity.this, GEcourselistActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
 
     private void initListData(){
         student.mapListGroup(listGroup);
