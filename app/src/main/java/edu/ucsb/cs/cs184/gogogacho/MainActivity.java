@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.widget.Toast;
+import android.util.Log;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.common.api.ResultCallback;
@@ -18,8 +19,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
@@ -37,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private Context context;
     private DatabaseReference database;
+
+    private User student;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +65,44 @@ public class MainActivity extends AppCompatActivity {
             toast.show();
         }
 
+        database.child("users").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String userId = auth.getCurrentUser().getUid();
+                String college = snapshot.child(auth.getUid()).child("college").getValue(String.class);
+                Log.v("read",college);
+                if(college.equals("College of Engineering")) {
+                    student = snapshot.child(userId).getValue(COEstudent.class);
+                }else if(college.equals("College of Creative Study")){
+                    student = snapshot.child(userId).getValue(User.class);
+                }else if(college.equals("College of Letters and Science")){
+                    student = snapshot.child(userId).getValue(User.class);
+                }else{
+                    User temp = snapshot.child(userId).getValue(User.class);
+                }
+                Log.v("read", student.getEmail());
+                Log.v("read", student.majorRequiredCourses.get(0).toString());
+                Log.v("read", String.valueOf(student.majorRequiredCourses.get(0).getTaken()));
+                Log.v("read", student.majorRequiredCourses.get(1).toString());
+                Log.v("read", String.valueOf(student.majorRequiredCourses.get(1).getTaken()));
+                Log.v("read", student.majorRequiredCourses.get(2).toString());
+                Log.v("read", String.valueOf(student.majorRequiredCourses.get(2).getTaken()));
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+
+//        Log.v("read", String.valueOf(student == null));
+//        Log.v("read", student.getEmail());
+//        Log.v("read", student.majorRequiredCourses.get(0).toString());
+//        Log.v("read", String.valueOf(student.majorRequiredCourses.get(0).getTaken()));
+//        Log.v("read", student.majorRequiredCourses.get(1).toString());
+//        Log.v("read", String.valueOf(student.majorRequiredCourses.get(1).getTaken()));
+//        Log.v("read", student.majorRequiredCourses.get(2).toString());
+//        Log.v("read", String.valueOf(student.majorRequiredCourses.get(2).getTaken()));
 
 
         setContentView(R.layout.activity_main);

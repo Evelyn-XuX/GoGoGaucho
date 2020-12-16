@@ -6,6 +6,7 @@ import java.util.List;
 
 public class User {
 
+    private final static int unit = 182;
     public String email;
     public String major;
     public String college;

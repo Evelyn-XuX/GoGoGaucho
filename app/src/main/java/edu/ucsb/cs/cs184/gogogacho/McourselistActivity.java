@@ -55,21 +55,47 @@ public class McourselistActivity extends AppCompatActivity {
         expandableListView.setAdapter(adapter);
 
         String major = getIntent().getStringExtra("major");
-        String college = getIntent().getStringExtra("college");
+        String c = getIntent().getStringExtra("college");
         if (major.equals("Computer Science")){
             major = "CS";
         }
 
-        if(college.equals("College of Engineering")) {
+        if(c.equals("College of Engineering")) {
             student = new COEstudent();
-        }else if(college.equals("College of Creative Study")){
+        }else if(c.equals("College of Creative Study")){
             student = new User(); // CCSstudent();
         }else{
             student = new User(); // LSstudent();
         }
-
-        student.setCollege(college);
+        student.setCollege(c);
         student.setMajor(major);
+        student.setEmail(auth.getCurrentUser().getEmail());
+
+//        database.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                String userId = auth.getCurrentUser().getUid();
+//                Log.v("debug", String.valueOf(snapshot.hasChild(userId)));
+//                String college = snapshot.child(auth.getUid()).child("college").getValue(String.class);
+//                Log.v("read", college);
+//
+//                if(college.equals("College of Engineering")) {
+//                    student = snapshot.child(userId).getValue(COEstudent.class);
+//                }else if(college.equals("College of Creative Study")){
+//                    student = snapshot.child(userId).getValue(User.class);
+//                }else if(college.equals("College of Letters and Science")){
+//                    student = snapshot.child(userId).getValue(User.class);
+//                }else{
+//                    User temp = snapshot.child(userId).getValue(User.class);
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+
 
         initListData();
 
@@ -85,6 +111,10 @@ public class McourselistActivity extends AppCompatActivity {
                 Course selected_course = (Course) adapter.getChild(groupPosition,childPosition);
                 selected_course.setTaken(!selected_course.getTaken());
 
+                FirebaseUser user = auth.getCurrentUser();
+                String userId = user.getUid();
+                database.child("users").child(userId).setValue(student);
+
                 return true;
             }
         });
@@ -99,8 +129,6 @@ public class McourselistActivity extends AppCompatActivity {
                   2. Fetch the required course_list of this major from Firebase
          */
 
-        FirebaseUser user = auth.getCurrentUser();
-        String userId = user.getUid();
         if (student.noCourse()){
             if(student.getCollege().equals("College of Engineering")) {
                 getCoursesFromDB_COE();
@@ -109,8 +137,6 @@ public class McourselistActivity extends AppCompatActivity {
             }else{
                 getCoursesFromDB_LS();
             }
-        }else{
-            // read user info
         }
 
         student.mapListItem(listItem);
