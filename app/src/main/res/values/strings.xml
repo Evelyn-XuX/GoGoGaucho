@@ -10,14 +10,16 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
-    <string name="sign_in_with_google">Sign In with Google</string>
-    <string name="sign_up">Sign Up</string>
+    <string name="sign_in_with_google">Sign In with </string>
+    <string name="sign_up">Create an account</string>
     <string name="or">or</string>
     <string name="sign_in">Sign In</string>
     <string name="enter_password">Enter Password</string>
     <string name="enter_email">Enter Email</string>
     <string name="sign_out">Sign Out</string>
     <string name="sideshow">SideShow</string>
+    <string name="account">Already have an account?</string>
+    <string name="no_account">Don\'t have an account?</string>
 
     <string name="college1">College of Creative Study</string>
     <string name="college2">College of Engineering</string>
@@ -72,8 +74,33 @@
     <string name="require">Major Require</string>
     <string name="elective">Major Elective</string>
     <string name="science">Science Elective</string>
+    <string name="google_icon">Google Icon</string>
+    <string name="app_logo">App Logo</string>
+    <string name="policy">By continuing, you agree to our Terms of Service and Private Policy</string>
+    <string name="major_requirement">Major Requirement</string>
+    <string name="general_education">General Education</string>
+    <string name="welcome">Hello, Student</string>
+    <string name="social_science">Social Science</string>
+    <string name="area_d">Area D</string>
+    <string name="completed">Completed</string>
+    <string name="rocket_launch">Rocket Launch</string>
+    <string name="enter_button">Enter Button</string>
+    <string name="area_icon">Area Icon</string>
+    <string name="area_e">Area E</string>
+    <string name="culture_thought">Culture and Thought</string>
+    <string name="the_arts">The Arts</string>
+    <string name="area_f">Area F</string>
+    <string name="area_g">Area G</string>
+    <string name="literature">Literature</string>
+    <string name="major_courses">Major Courses</string>
+    <string name="major_electives">Major Electives</string>
+    <string name="you_have_completed">You have completed</string>
+    <string name="_123">123</string>
+    <string name="units">units</string>
 
-
-
+    <string name="ge_title">Please select General Education courses taken</string>
+    <string name="major_title">What is your major?</string>
+    <string name="next">NEXT</string>
+    <string name="mjcourse_title">Please select courses taken</string>
 
 </resources>

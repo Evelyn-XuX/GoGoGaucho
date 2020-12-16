@@ -82,6 +82,7 @@ public class MajorActivity extends AppCompatActivity {
             }
         });
 
+
     }
 
     private void initListData(){
