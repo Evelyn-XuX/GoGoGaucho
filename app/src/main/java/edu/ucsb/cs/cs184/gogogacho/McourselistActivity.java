@@ -19,6 +19,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,10 +33,10 @@ public class McourselistActivity extends AppCompatActivity {
 
     ExpandableListView expandableListView;
     List<String> listGroup;
-    HashMap<String, List<String>> listItem;
-    MainAdapter adapter;
+    HashMap<String, List<Course>> listItem;
+    CourseAdapter adapter;
 
-    ArrayAdapter<String> arrayAdapter;
+    private User student;
 
 
     @Override
@@ -50,8 +51,25 @@ public class McourselistActivity extends AppCompatActivity {
         listGroup = new ArrayList<>();
         listItem = new HashMap<>();
         mMajorCourse = new ArrayList<>();
-        adapter =  new MainAdapter(this,listGroup,listItem);
+        adapter =  new CourseAdapter(this,listGroup,listItem);
         expandableListView.setAdapter(adapter);
+
+        String major = getIntent().getStringExtra("major");
+        String college = getIntent().getStringExtra("college");
+        if (major.equals("Computer Science")){
+            major = "CS";
+        }
+
+        if(college.equals("College of Engineering")) {
+            student = new COEstudent();
+        }else if(college.equals("College of Creative Study")){
+            student = new User(); // CCSstudent();
+        }else{
+            student = new User(); // LSstudent();
+        }
+
+        student.setCollege(college);
+        student.setMajor(major);
 
         initListData();
 
@@ -64,10 +82,8 @@ public class McourselistActivity extends AppCompatActivity {
                             by clicking the "next" button, store the List into current user's Firebase
                  */
                 
-                final String selected_major = (String) adapter.getChild(groupPosition,childPosition);
-                Log.d("Inside major course list",selected_major);
-                Intent intent = new Intent(McourselistActivity.this, GEcourselistActivity.class);
-                startActivity(intent);
+                Course selected_course = (Course) adapter.getChild(groupPosition,childPosition);
+                selected_course.setTaken(!selected_course.getTaken());
 
                 return true;
             }
@@ -76,11 +92,7 @@ public class McourselistActivity extends AppCompatActivity {
     }
 
     private void initListData(){
-        listGroup.add(getString(R.string.require));
-        listGroup.add(getString(R.string.elective));
-        listGroup.add(getString(R.string.science));
-
-
+        student.mapListGroup(listGroup);
         /*
             TODO:
                   1. Get the major of current user from Firebase   (We only have CS required course_list on Firebase so far)
@@ -89,33 +101,58 @@ public class McourselistActivity extends AppCompatActivity {
 
         FirebaseUser user = auth.getCurrentUser();
         String userId = user.getUid();
-
-
-        String[] array;
-
-        //store the names of major require courses
-        List<String> list1 = new ArrayList<>();
-        array = getResources().getStringArray(R.array.c1);
-        for(String item : array){
-            list1.add(item);
+        if (student.noCourse()){
+            if(student.getCollege().equals("College of Engineering")) {
+                getCoursesFromDB_COE();
+            }else if(student.getCollege().equals("College of Creative Study")){
+                getCoursesFromDB_CCS();
+            }else{
+                getCoursesFromDB_LS();
+            }
+        }else{
+            // read user info
         }
 
-
-        //store the names of major elective course
-        List<String> list2 = new ArrayList<>();
-        array = getResources().getStringArray(R.array.c2);
-        for(String item : array){
-            list2.add(item);
-        }
-
-        //store the names of science elective
-        //List<String> list3 = new ArrayList<>();
-
-        listItem.put(listGroup.get(0),list1);
-        listItem.put(listGroup.get(1),list2);
-        listItem.put(listGroup.get(2),list1);
+        student.mapListItem(listItem);
         adapter.notifyDataSetChanged();
+    }
 
+    void getCoursesFromDB_LS(){}
+    void getCoursesFromDB_CCS(){}
+    void getCoursesFromDB_COE(){
+        List<Course> MajorRequired = this.student.getMajorRequiredCourses();
+        List<Course> MajorElective = this.student.getMajorElectiveCourses();
+        List<Course> ScienceElective = ((COEstudent)this.student).getScienceElectiveCourses();
+
+        database.child(student.getMajor() + "_major").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Course obj;
+                for(DataSnapshot t : snapshot.child(student.getMajor() +"_Required").getChildren()) {
+                    for (DataSnapshot c : t.getChildren()) {
+                        obj = c.getValue(Course.class);
+                        MajorRequired.add(obj);
+                    }
+                }
+                for(DataSnapshot t : snapshot.child(student.getMajor() + "_elective").getChildren()) {
+                    for (DataSnapshot c : t.getChildren()) {
+                        obj = c.getValue(Course.class);
+                        MajorElective.add(obj);
+                    }
+                }
+                for(DataSnapshot t : snapshot.child(student.getMajor() +"_Science_elective").getChildren()) {
+                    for (DataSnapshot c : t.getChildren()) {
+                        obj = c.getValue(Course.class);
+                        ScienceElective.add(obj);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
     }
 }
