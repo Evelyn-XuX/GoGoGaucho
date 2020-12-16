@@ -1,50 +1,67 @@
 package edu.ucsb.cs.cs184.gogogacho;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class User {
 
     public String email;
     public String major;
-    public List<String> majorCourses;
-    public List<String> geCourses;
+    public String college;
+    public List<Course> majorRequiredCourses;
+    public List<Course> majorElectiveCourses;
+    public List<Course> geCourses;
 
-    public User(){ }
+    public User(){ this.email = "";
+        major="";
+        college="";
+        majorRequiredCourses = new ArrayList<>();
+        majorElectiveCourses = new ArrayList<>();
+        geCourses = new ArrayList<>();}
 
     public User(String email){
         this.email = email;
+        this.college = "";
         major="";
-        majorCourses = new ArrayList<>();
+        majorRequiredCourses = new ArrayList<>();
+        majorElectiveCourses = new ArrayList<>();
         geCourses = new ArrayList<>();
     }
 
-    public User(String email, String major, List<String> majorCourses, List<String> geCourses){
+    public User(String email, String college ,String major, List<Course> majorRequiredCourses, List<Course> majorElectiveCourses, List<Course> geCourses){
         this.email = email;
+        this.college = college;
         this.major = major;
-        this.majorCourses = majorCourses;
+        this.majorRequiredCourses = majorRequiredCourses;
+        this.majorElectiveCourses = majorElectiveCourses;
         this.geCourses = geCourses;
     }
 
+    public void setEmail(String email) { this.email = email;}
+    public void setCollege(String college) { this.college = college; }
     public void setMajor(String major){
         this.major = major;
     }
-
-    public void setMajorCourseList(List<String> list){
-        majorCourses = list;
+    public void setMajorRequiredCourses(List<Course> list){
+        majorRequiredCourses = list;
     }
-
-    public void setGECourseList(List<String> list){
+    public void setMajorElectiveCourses(List<Course> list){
+        majorElectiveCourses = list;
+    }
+    public void setGECourseList(List<Course> list){
         geCourses = list;
     }
 
-    public List<String> getMajorCourses(){return majorCourses;}
+    public String getEmail(){return this.email;}
+    public String getCollege(){return this.college;}
+    public String getMajor(){return this.major;}
+    public List<Course> getMajorRequiredCourses(){return majorRequiredCourses;}
+    public List<Course> getMajorElectiveCourses(){return majorElectiveCourses;}
+    public List<Course> getGeCourses(){return geCourses;}
 
-    public List<String> getGeCourses(){return geCourses;}
-
-
-
-
-
+    public void mapListGroup(List<String> listGroup){}
+    public void mapListItem(HashMap<String, List<Course>> listItem){}
+    public boolean noCourse(){return this.majorRequiredCourses.size() == 0;}
 
 }
