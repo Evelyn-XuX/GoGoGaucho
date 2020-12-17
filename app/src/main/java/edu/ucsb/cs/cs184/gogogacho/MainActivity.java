@@ -7,6 +7,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -37,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private Context context;
     private DatabaseReference database;
+    private Button b1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,27 +62,8 @@ public class MainActivity extends AppCompatActivity {
             toast.show();
         }
 
-        /*
-        TODO: Show completed unit(TextView20)
-         */
-
-
-        /*
-        TODO: Click "Button" to list Major Courses that have been taken
-         */
-
-
-        /*
-        TODO: Click "Button3" to list Major Elective that have been taken
-         */
-
-        /*
-        TODO: Click "ImageButton2" to list Area D that have been taken
-
-         */
-
-
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -122,6 +106,12 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+
+    }
+
+    private void nextShowMajorCourse(){
+        Intent intent = new Intent(MainActivity.this, ShowMajorCourse.class);
+        startActivity(intent);
 
     }
 
