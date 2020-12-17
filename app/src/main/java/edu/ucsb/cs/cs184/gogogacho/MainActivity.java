@@ -7,7 +7,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -38,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private Context context;
     private DatabaseReference database;
-    private Button b;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,8 +67,6 @@ public class MainActivity extends AppCompatActivity {
         /*
         TODO: Click "Button" to list Major Courses that have been taken
          */
-//        b = findViewById(R.id.button);
-//        b.setOnClickListener(task->nextMajorCourse());
 
 
         /*
@@ -78,23 +74,9 @@ public class MainActivity extends AppCompatActivity {
          */
 
         /*
-        TODO: Click "imageButton2" to list Area D that have been taken
+        TODO: Click "ImageButton2" to list Area D that have been taken
+
          */
-
-        /*
-        TODO: Click "imageButton3" to list Area E that have been taken
-         */
-
-
-        /*
-        TODO: Click "imageButton4" to list Area F that have been taken
-         */
-
-
-        /*
-        TODO: Click "imageButton5" to list Area G that have been taken
-         */
-
 
 
         setContentView(R.layout.activity_main);
@@ -141,13 +123,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
 
 
-    }
-
-
-    private void nextMajorCourse(){
-        Intent intent = new Intent(MainActivity.this, ShowMajorCourse.class);
-        startActivity(intent);
-        finish();
     }
 
     @Override

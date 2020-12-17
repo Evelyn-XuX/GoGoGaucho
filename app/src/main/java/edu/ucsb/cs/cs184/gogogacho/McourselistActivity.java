@@ -30,38 +30,32 @@ public class McourselistActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private DatabaseReference database;
 
-    private ArrayList<String> mMajorCourse;
-
     ExpandableListView expandableListView;
     List<String> listGroup;
     HashMap<String, List<Course>> listItem;
     CourseAdapter adapter;
 
+    private String college;
     private User student;
     private Button next;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mjcourselist);
-
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance().getReference();
-
-        expandableListView = findViewById(R.id.expandable_ListView_majorCourse);
-        next = findViewById(R.id.button5);
         listGroup = new ArrayList<>();
         listItem = new HashMap<>();
-        mMajorCourse = new ArrayList<>();
         adapter =  new CourseAdapter(this,listGroup,listItem);
+        expandableListView = findViewById(R.id.expandable_ListView_majorCourse);
         expandableListView.setAdapter(adapter);
+        next = findViewById(R.id.button5);
+        next.setOnClickListener(task->nextGE());
 
         String major = getIntent().getStringExtra("major");
-        String college = getIntent().getStringExtra("college");
-        if (major.equals("Computer Science")){
-            major = "CS";
-        }
+        if (major.equals("Computer Science")){ major = "CS"; }
+        college = getIntent().getStringExtra("college");
 
         if(college.equals("College of Engineering")) {
             student = new COEstudent();
@@ -70,25 +64,20 @@ public class McourselistActivity extends AppCompatActivity {
         }else{
             student = new User(); // LSstudent();
         }
-
         student.setCollege(college);
         student.setMajor(major);
-
+        student.setEmail(auth.getCurrentUser().getEmail());
         initListData();
-        next.setOnClickListener(task->nextGE());
 
         expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                /*
-                    TODO: 1. allow user have multiple choices, and stored their choices as String into a List;
-                          2. Set up a button to indicate user have already make their decisions:
-                            by clicking the "next" button, store the List into current user's Firebase
-                 */
                 
                 Course selected_course = (Course) adapter.getChild(groupPosition,childPosition);
                 selected_course.setTaken(!selected_course.getTaken());
-                next.setOnClickListener(task->nextGE());
+                FirebaseUser user = auth.getCurrentUser();
+                String userId = user.getUid();
+                database.child("users").child(userId).setValue(student);
 
                 return true;
             }
@@ -96,7 +85,21 @@ public class McourselistActivity extends AppCompatActivity {
 
     }
     private void nextGE(){
+        FirebaseUser user = auth.getCurrentUser();
+        String userId = user.getUid();
+        database.child("users").child(userId).setValue(student);
         Intent intent = new Intent(McourselistActivity.this, GEcourselistActivity.class);
+        intent.putExtra("college", college);
+        Log.v("read","send student");
+        intent.putExtra("student",(COEstudent)student);
+        Log.v("read","sent");
+//        if(college.equals("College of Engineering")) {
+//            intent.putExtra("student",(COEstudent)student);
+//        }else if(college.equals("College of Creative Study")){
+//            intent.putExtra("student",(COEstudent)student);
+//        }else{
+//            intent.putExtra("student",(COEstudent)student);
+//        }
         startActivity(intent);
         finish();
     }
@@ -104,26 +107,13 @@ public class McourselistActivity extends AppCompatActivity {
 
     private void initListData(){
         student.mapListGroup(listGroup);
-        /*
-            TODO:
-                  1. Get the major of current user from Firebase   (We only have CS required course_list on Firebase so far)
-                  2. Fetch the required course_list of this major from Firebase
-         */
-
-        FirebaseUser user = auth.getCurrentUser();
-        String userId = user.getUid();
-        if (student.noCourse()){
-            if(student.getCollege().equals("College of Engineering")) {
-                getCoursesFromDB_COE();
-            }else if(student.getCollege().equals("College of Creative Study")){
-                getCoursesFromDB_CCS();
-            }else{
-                getCoursesFromDB_LS();
-            }
+        if(student.getCollege().equals("College of Engineering")) {
+            getCoursesFromDB_COE();
+        }else if(student.getCollege().equals("College of Creative Study")){
+            getCoursesFromDB_CCS();
         }else{
-            // read user info
+            getCoursesFromDB_LS();
         }
-
         student.mapListItem(listItem);
         adapter.notifyDataSetChanged();
     }
@@ -142,18 +132,21 @@ public class McourselistActivity extends AppCompatActivity {
                 for(DataSnapshot t : snapshot.child(student.getMajor() +"_Required").getChildren()) {
                     for (DataSnapshot c : t.getChildren()) {
                         obj = c.getValue(Course.class);
+                        obj.setClassName(c.getKey());
                         MajorRequired.add(obj);
                     }
                 }
                 for(DataSnapshot t : snapshot.child(student.getMajor() + "_elective").getChildren()) {
                     for (DataSnapshot c : t.getChildren()) {
                         obj = c.getValue(Course.class);
+                        obj.setClassName(c.getKey());
                         MajorElective.add(obj);
                     }
                 }
                 for(DataSnapshot t : snapshot.child(student.getMajor() +"_Science_elective").getChildren()) {
                     for (DataSnapshot c : t.getChildren()) {
                         obj = c.getValue(Course.class);
+                        obj.setClassName(c.getKey());
                         ScienceElective.add(obj);
                     }
                 }
