@@ -75,6 +75,7 @@ public class McourselistActivity extends AppCompatActivity {
                 
                 Course selected_course = (Course) adapter.getChild(groupPosition,childPosition);
                 selected_course.setTaken(!selected_course.getTaken());
+
                 if(selected_course.getTaken()){
                     v.setBackgroundColor(getColor(R.color.select));
                 }else{
@@ -95,9 +96,7 @@ public class McourselistActivity extends AppCompatActivity {
         database.child("users").child(userId).setValue(student);
         Intent intent = new Intent(McourselistActivity.this, GEcourselistActivity.class);
         intent.putExtra("college", college);
-        Log.v("read","send student");
         intent.putExtra("student",(COEstudent)student);
-        Log.v("read","sent");
 //        if(college.equals("College of Engineering")) {
 //            intent.putExtra("student",(COEstudent)student);
 //        }else if(college.equals("College of Creative Study")){
@@ -106,7 +105,6 @@ public class McourselistActivity extends AppCompatActivity {
 //            intent.putExtra("student",(COEstudent)student);
 //        }
         startActivity(intent);
-        finish();
     }
 
 

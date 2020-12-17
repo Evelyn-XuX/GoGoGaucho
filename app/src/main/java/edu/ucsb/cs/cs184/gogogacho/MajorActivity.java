@@ -61,21 +61,12 @@ public class MajorActivity extends AppCompatActivity {
 
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-
-                /*
-                    TODO: (low priority) change background color when click a specific major
-                 */
                 final String selected_major = (String) adapter.getChild(groupPosition,childPosition);
                 final String selected_college = (String) adapter.getGroup(groupPosition);
-
-                v.setBackgroundColor(getColor(R.color.select));
-
-                Log.d("selected major",selected_major);
 
                 FirebaseUser user = auth.getCurrentUser();
                 String email = user.getEmail();
                 database.child("users").child(user.getUid()).child("major").setValue(selected_major);
-
                 Intent intent = new Intent(MajorActivity.this,McourselistActivity.class);
                 intent.putExtra("major", selected_major);
                 intent.putExtra("college", selected_college);
@@ -102,7 +93,6 @@ public class MajorActivity extends AppCompatActivity {
             list1.add(item);
         }
 
-
         List<String> list2 = new ArrayList<>();
         //store the names of department in COE into list2
         array = getResources().getStringArray(R.array.c2);
@@ -110,18 +100,12 @@ public class MajorActivity extends AppCompatActivity {
             list2.add(item);
         }
 
-
-        /*
-        TODO: import the names of departments in college of letter and science
-              （strings.xml里手动输入？）
-         */
         List<String> list3 = new ArrayList<>();
         //store the names of department in COE into list2
         array = getResources().getStringArray(R.array.c3);
         for(String item : array){
             list3.add(item);
         }
-
 
         listItem.put(listGroup.get(0),list1);
         listItem.put(listGroup.get(1),list2);
