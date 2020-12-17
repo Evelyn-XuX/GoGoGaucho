@@ -36,6 +36,7 @@ public class MajorActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private DatabaseReference database;
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +66,7 @@ public class MajorActivity extends AppCompatActivity {
                     TODO: (low priority) change background color when click a specific major
                  */
                 final String selected_major = (String) adapter.getChild(groupPosition,childPosition);
+                final String selected_college = (String) adapter.getGroup(groupPosition);
                 Log.d("selected major",selected_major);
 
                 FirebaseUser user = auth.getCurrentUser();
@@ -72,11 +74,14 @@ public class MajorActivity extends AppCompatActivity {
                 database.child("users").child(user.getUid()).child("major").setValue(selected_major);
 
                 Intent intent = new Intent(MajorActivity.this,McourselistActivity.class);
+                intent.putExtra("major", selected_major);
+                intent.putExtra("college", selected_college);
                 startActivity(intent);
 
                 return true;
             }
         });
+
 
     }
 
@@ -108,12 +113,16 @@ public class MajorActivity extends AppCompatActivity {
               （strings.xml里手动输入？）
          */
         List<String> list3 = new ArrayList<>();
-
+        //store the names of department in COE into list2
+        array = getResources().getStringArray(R.array.c3);
+        for(String item : array){
+            list3.add(item);
+        }
 
 
         listItem.put(listGroup.get(0),list1);
         listItem.put(listGroup.get(1),list2);
-        listItem.put(listGroup.get(2),list1);
+        listItem.put(listGroup.get(2),list3);
 
         adapter.notifyDataSetChanged();
 

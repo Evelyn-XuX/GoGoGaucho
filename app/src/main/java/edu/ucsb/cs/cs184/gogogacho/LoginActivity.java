@@ -61,7 +61,6 @@ public class LoginActivity extends AppCompatActivity {
         loginButton = findViewById(R.id.login_btn);
         googleLogin = findViewById(R.id.button2);
 
-
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance().getReference();
 
@@ -76,7 +75,6 @@ public class LoginActivity extends AppCompatActivity {
                 signIn();
             }
         });
-
 
     }
 
@@ -141,9 +139,9 @@ public class LoginActivity extends AppCompatActivity {
 
                             FirebaseUser user = task.getResult().getUser();
                             String email = user.getEmail();
+
                             Boolean result = isExist(user.getUid());
                             Log.d("isExist",Boolean.toString(result));
-
 
                             if(result){
                                 //this Google account already store in firebase
@@ -163,6 +161,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Intent intent = new Intent(LoginActivity.this, MajorActivity.class);
                                 startActivity(intent);
                             }
+
                             finish();
 
                         } else {
@@ -175,32 +174,48 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 });
-
-
-
     }
 
 
 
     private boolean isExist(String userId){
-        final boolean[] result = {false};
-        database.child("users").child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+
+        boolean[] result = new boolean[1];
+        database.child("users").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
+                if(snapshot.hasChild(userId)){
+                    Log.v("isExist","yes");
                     // use "username" already exists
                     result[0] = true;
                 } else {
+                    Log.v("isExist","no");
                     // User does not exist. NOW call createUserWithEmailAndPassword
                     result[0] = false;
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
+
+//        database.child("users").child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                if(snapshot.exists()){
+//                    // use "username" already exists
+//                    result[0] = true;
+//                } else {
+//                    // User does not exist. NOW call createUserWithEmailAndPassword
+//                    result[0] = false;
+//                }
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
         return result[0];
     }
 
@@ -238,7 +253,6 @@ public class LoginActivity extends AppCompatActivity {
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(intent);
                                 finish();
-
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Context context = getApplicationContext();
