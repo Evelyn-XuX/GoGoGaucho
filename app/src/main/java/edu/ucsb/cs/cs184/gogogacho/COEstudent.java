@@ -145,7 +145,7 @@ public class COEstudent extends User{
         if(majorcount >= majorElective && sciencecount >= scienceElective){
             return "Completed";
         }
-        return String.format("major: %d / %d\nscience %d /%d",majorcount, majorElective, sciencecount, scienceElective);
+        return String.format("major elective: %d / %d\nscience elective: %d /%d",majorcount, majorElective, sciencecount, scienceElective);
     }
 
     public String areaACompleteness(){
@@ -164,7 +164,7 @@ public class COEstudent extends User{
         if(a1count >= areaA1 && a2count >= areaA2){
             return "Completed";
         }
-        return String.format("A1: %d / %d    A2: %d / %d ", a1count, areaA1, a2count, areaA2);
+        return String.format("Area A1: %d / %d        Area A2: %d / %d ", a1count, areaA1, a2count, areaA2);
 
     }
     public String areaDCompleteness(){

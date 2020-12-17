@@ -2,6 +2,7 @@ package edu.ucsb.cs.cs184.gogogacho.ui.home;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,6 +32,8 @@ import edu.ucsb.cs.cs184.gogogacho.AreaE;
 import edu.ucsb.cs.cs184.gogogacho.AreaF;
 import edu.ucsb.cs.cs184.gogogacho.AreaG;
 import edu.ucsb.cs.cs184.gogogacho.COEstudent;
+import edu.ucsb.cs.cs184.gogogacho.GEcourselistActivity;
+import edu.ucsb.cs.cs184.gogogacho.McourselistActivity;
 import edu.ucsb.cs.cs184.gogogacho.R;
 import edu.ucsb.cs.cs184.gogogacho.ShowMajorCourse;
 import edu.ucsb.cs.cs184.gogogacho.ShowMajorElective;
@@ -168,43 +172,56 @@ public class HomeFragment extends Fragment {
         areaG = root.findViewById(R.id.imageButton5);
         areaG.setOnClickListener(task->nextAreaG());
 
-
-
         return root;
     }
 
     private void nextMajorCourse(){
+
         Intent intent = new Intent(getActivity(), ShowMajorCourse.class);
+        intent.putExtra("college", student.getCollege());
+        intent.putExtra("student",(COEstudent)student);
         startActivity(intent);
     }
 
     private void nextMajorEle(){
         Intent intent = new Intent(getActivity(), ShowMajorElective.class);
+        intent.putExtra("college", student.getCollege());
+        intent.putExtra("student",(COEstudent)student);
         startActivity(intent);
     }
 
     private void nextAreaA(){
         Intent intent = new Intent(getActivity(), AreaA.class);
+        intent.putExtra("college", student.getCollege());
+        intent.putExtra("student",(COEstudent)student);
         startActivity(intent);
     }
 
     private void nextAreaD(){
         Intent intent = new Intent(getActivity(), AreaD.class);
+        intent.putExtra("college", student.getCollege());
+        intent.putExtra("student",(COEstudent)student);
         startActivity(intent);
     }
 
     private void nextAreaE(){
         Intent intent = new Intent(getActivity(), AreaE.class);
+        intent.putExtra("college", student.getCollege());
+        intent.putExtra("student",(COEstudent)student);
         startActivity(intent);
     }
 
     private void nextAreaF(){
         Intent intent = new Intent(getActivity(), AreaF.class);
+        intent.putExtra("college", student.getCollege());
+        intent.putExtra("student",(COEstudent)student);
         startActivity(intent);
     }
 
     private void nextAreaG(){
         Intent intent = new Intent(getActivity(), AreaG.class);
+        intent.putExtra("college", student.getCollege());
+        intent.putExtra("student",(COEstudent)student);
         startActivity(intent);
     }
 
