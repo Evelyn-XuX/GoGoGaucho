@@ -76,7 +76,7 @@ public class McourselistActivity extends AppCompatActivity {
                 Course selected_course = (Course) adapter.getChild(groupPosition,childPosition);
                 selected_course.setTaken(!selected_course.getTaken());
                 if(selected_course.getTaken()){
-                    v.setBackgroundColor(getColor(R.color.purple_500));
+                    v.setBackgroundColor(getColor(R.color.select));
                 }else{
                     v.setBackgroundColor(getColor(R.color.white));
                 }

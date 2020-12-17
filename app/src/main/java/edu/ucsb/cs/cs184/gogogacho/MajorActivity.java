@@ -68,7 +68,7 @@ public class MajorActivity extends AppCompatActivity {
                 final String selected_major = (String) adapter.getChild(groupPosition,childPosition);
                 final String selected_college = (String) adapter.getGroup(groupPosition);
 
-                v.setBackgroundColor(getColor(R.color.purple_500));
+                v.setBackgroundColor(getColor(R.color.select));
 
                 Log.d("selected major",selected_major);
 
