@@ -22,7 +22,20 @@ public class HomeFragment extends Fragment {
     private TextView units;
     private TextView mCourses;
     private TextView mElectives;
-    private boolean complete;
+    private TextView areaA;
+    private TextView areaD;
+    private TextView areaE;
+    private TextView areaF;
+    private TextView areaG;
+    private String unitCompleted;
+    private String comCourse;
+    private String comElectives;
+    private String completeA;
+    private String completeD;
+    private String completeE;
+    private String completeF;
+    private String completeG;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -39,11 +52,40 @@ public class HomeFragment extends Fragment {
         units = root.findViewById(R.id.textView20);
         mCourses = root.findViewById(R.id.textView29);
         mElectives = root.findViewById(R.id.textView28);
+        areaA = root.findViewById(R.id.textView25);
+        areaD = root.findViewById(R.id.textView11);
+        areaE = root.findViewById(R.id.textView12);
+        areaF = root.findViewById(R.id.textView15);
+        areaG = root.findViewById(R.id.textView18);
+
+        //give user's course/complete conditions
+        unitCompleted = "111";
+        comCourse = "Incomplete";
+        comElectives = "Missing 2 courses";
+        completeA = "Completed";
+        completeD = "Completed";
+        completeE = "Completed";
+        completeF = "Completed";
+        completeG = "Completed";
+
+        units.setText(unitCompleted);
+        mCourses.setText(comCourse);
+        mElectives.setText(comElectives);
+        areaA.setText(completeA);
+        areaD.setText(completeD);
+        areaE.setText(completeE);
+        areaF.setText(completeF);
+        areaG.setText(completeG);
 
 
 
         return root;
     }
+
+
+
+
+
 
 
 }
