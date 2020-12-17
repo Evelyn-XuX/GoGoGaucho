@@ -1,4 +1,7 @@
 package edu.ucsb.cs.cs184.gogogacho;
 
-public class ShowMajorCourse {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class ShowMajorCourse  extends AppCompatActivity {
+
 }
