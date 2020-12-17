@@ -22,6 +22,13 @@
         <activity android:name=".SignupActivity"/>
         <activity android:name=".LoginActivity"/>
         <activity android:name=".MajorActivity"/>
+        <activity android:name=".ShowMajorCourse"/>
+        <activity android:name=".ShowMajorElective"/>
+        <activity android:name=".AreaA"/>
+        <activity android:name=".AreaD"/>
+        <activity android:name=".AreaE"/>
+        <activity android:name=".AreaF"/>
+        <activity android:name=".AreaG"/>
 
         <activity android:name=".McourselistActivity"
             android:parentActivityName=".MajorActivity">

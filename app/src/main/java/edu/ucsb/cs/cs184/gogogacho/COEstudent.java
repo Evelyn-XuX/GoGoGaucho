@@ -1,5 +1,7 @@
 package edu.ucsb.cs.cs184.gogogacho;
 
+import android.util.Log;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,7 +19,6 @@ public class COEstudent extends User{
     private static int areaG = 1;
 
     public List<Course> scienceElectiveCourses;
-
     public List<Course> geAreaA1;
     public List<Course> geAreaA2;
     public List<Course> geAreaD;
@@ -39,14 +40,12 @@ public class COEstudent extends User{
 
     public COEstudent(String email, String college, String major, List<Course> majorRequiredCourses,
                       List<Course> majorElectiveCourses,
-                      List<Course> geCourses,
                       List<Course> scienceElectiveCourses){
-        super(email,college,major,majorRequiredCourses,majorElectiveCourses,geCourses);
+        super(email,college,major,majorRequiredCourses,majorElectiveCourses);
         this.scienceElectiveCourses = scienceElectiveCourses;
     }
 
     public void setScienceElectiveCourses(List<Course> Courses){this.scienceElectiveCourses = Courses;}
-
     public void setGeAreaA1(List<Course> geAreaA1) { this.geAreaA1 = geAreaA1; }
     public void setGeAreaA2(List<Course> geAreaA2) { this.geAreaA2 = geAreaA2; }
     public void setGeAreaD(List<Course> geAreaD) { this.geAreaD = geAreaD; }
@@ -61,6 +60,163 @@ public class COEstudent extends User{
     public List<Course> getGeAreaF() { return geAreaF; }
     public List<Course> getGeAreaG() { return geAreaG; }
     public List<Course> getScienceElectiveCourses(){return scienceElectiveCourses;}
+
+    @Override
+    public String getTotalUnit(){
+        int count = 0;
+
+        for(Course i : majorRequiredCourses){
+            if (i.getTaken()){
+                count++;
+            }
+        }
+        for(Course i : majorElectiveCourses){
+            if (i.getTaken()){
+                count++;
+            }
+        }
+        for(Course i : scienceElectiveCourses){
+            if (i.getTaken()){
+                count++;
+            }
+        }
+        for(Course i : geAreaA1){
+            if (i.getTaken()){
+                count++;
+            }
+        }
+        for(Course i : geAreaA2){
+            if (i.getTaken()){
+                count++;
+            }
+        }
+        for(Course i : geAreaD){
+            if (i.getTaken()){
+                count++;
+            }
+        }
+        for(Course i : geAreaE){
+            if (i.getTaken()){
+                count++;
+            }
+        }
+        for(Course i : geAreaF){
+            if (i.getTaken()){
+                count++;
+            }
+        }
+        for(Course i : geAreaG){
+            if (i.getTaken()){
+                count++;
+            }
+        }
+        return String.valueOf(count * 4);
+    }
+
+
+    @Override
+    public String requiredCourseCompleteness(){
+        int count = 0;
+        for(Course i : majorRequiredCourses){
+            if (i.getTaken()){
+                count++;
+            }
+        }
+        if (count >= majorRequiredCourses.size()){
+            return "Completed";
+        }
+        return String.format("%d / %d", count, majorRequiredCourses.size());
+    }
+
+    @Override
+    public String electiveCourseCompleteness(){
+        int majorcount = 0;
+        int sciencecount = 0;
+        for(Course i : majorElectiveCourses){
+            if (i.getTaken()){
+                majorcount++;
+            }
+        }
+        for(Course i : scienceElectiveCourses){
+            if (i.getTaken()){
+                sciencecount++;
+            }
+        }
+        if(majorcount >= majorElective && sciencecount >= scienceElective){
+            return "Completed";
+        }
+        return String.format("major: %d / %d\nscience %d /%d",majorcount, majorElective, sciencecount, scienceElective);
+    }
+
+    public String areaACompleteness(){
+        int a1count = 0;
+        int a2count = 0;
+        for(Course i : geAreaA1){
+            if (i.getTaken()){
+                a1count++;
+            }
+        }
+        for(Course i : geAreaA2){
+            if (i.getTaken()){
+                a2count++;
+            }
+        }
+        if(a1count >= areaA1 && a2count >= areaA2){
+            return "Completed";
+        }
+        return String.format("A1: %d / %d    A2: %d / %d ", a1count, areaA1, a2count, areaA2);
+
+    }
+    public String areaDCompleteness(){
+        int dcount = 0;
+        for(Course i : geAreaD){
+            if (i.getTaken()){
+                dcount++;
+            }
+        }
+        if(dcount >= areaD){
+            return "Completed";
+        }
+        return String.format("Missing %d courses",areaD - dcount);
+
+    }
+    public String areaECompleteness(){
+        int ecount = 0;
+        for(Course i : geAreaE){
+            if (i.getTaken()){
+                ecount++;
+            }
+        }
+        if(ecount >= areaE){
+            return "Completed";
+        }
+        return String.format("Missing %d courses", areaE - ecount);
+    }
+    public String areaFCompleteness(){
+        int fcount = 0;
+        for(Course i : geAreaF){
+            if (i.getTaken()){
+                fcount++;
+            }
+        }
+        if(fcount >= areaF){
+            return "Completed";
+        }
+        return String.format("Missing %d courses", areaF - fcount);
+    }
+
+    public String areaGCompleteness(){
+        int gcount = 0;
+        for(Course i : geAreaG){
+            if (i.getTaken()){
+                gcount++;
+            }
+        }
+        if(gcount >= areaG){
+            return "Completed";
+        }
+        return String.format("Missing %d courses", areaG - gcount);
+    }
 
     @Override
     public void mapListGroup(List<String> listGroup) {

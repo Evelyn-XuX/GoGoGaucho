@@ -7,8 +7,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.Button;
 import android.widget.Toast;
-import android.util.Log;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.common.api.ResultCallback;
@@ -19,11 +19,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
@@ -41,12 +38,13 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private Context context;
     private DatabaseReference database;
+    private Button b1;
 
-    private User student;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
         context =this;
         auth = FirebaseAuth.getInstance();
@@ -64,47 +62,8 @@ public class MainActivity extends AppCompatActivity {
             toast.show();
         }
 
-        database.child("users").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                String userId = auth.getCurrentUser().getUid();
-//                String college = snapshot.child(auth.getUid()).child("college").getValue(String.class);
-//                Log.v("read",college);
-//                if(college.equals("College of Engineering")) {
-//                    student = snapshot.child(userId).getValue(COEstudent.class);
-//                }else if(college.equals("College of Creative Study")){
-//                    student = snapshot.child(userId).getValue(User.class);
-//                }else if(college.equals("College of Letters and Science")){
-//                    student = snapshot.child(userId).getValue(User.class);
-//                }else{
-//                    User temp = snapshot.child(userId).getValue(User.class);
-//                }
-//                Log.v("read", student.getEmail());
-//                Log.v("read", student.majorRequiredCourses.get(0).toString());
-//                Log.v("read", String.valueOf(student.majorRequiredCourses.get(0).getTaken()));
-//                Log.v("read", student.majorRequiredCourses.get(1).toString());
-//                Log.v("read", String.valueOf(student.majorRequiredCourses.get(1).getTaken()));
-//                Log.v("read", student.majorRequiredCourses.get(2).toString());
-//                Log.v("read", String.valueOf(student.majorRequiredCourses.get(2).getTaken()));
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-//        Log.v("read", String.valueOf(student == null));
-//        Log.v("read", student.getEmail());
-//        Log.v("read", student.majorRequiredCourses.get(0).toString());
-//        Log.v("read", String.valueOf(student.majorRequiredCourses.get(0).getTaken()));
-//        Log.v("read", student.majorRequiredCourses.get(1).toString());
-//        Log.v("read", String.valueOf(student.majorRequiredCourses.get(1).getTaken()));
-//        Log.v("read", student.majorRequiredCourses.get(2).toString());
-//        Log.v("read", String.valueOf(student.majorRequiredCourses.get(2).getTaken()));
-
-
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -119,23 +78,23 @@ public class MainActivity extends AppCompatActivity {
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.logout_btn:
-                        Context context = getApplicationContext();
-                        CharSequence text = "Whyyy";
-                        int duration = Toast.LENGTH_SHORT;
-                        Toast toast = Toast.makeText(context, text, duration);
-                        toast.show();
-                        logout();
-                        return true;
-                    default:
-                        return MainActivity.super.onNavigateUp();
-                }
-            }
-        });
+//        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                switch (item.getItemId()) {
+//                    case R.id.logout_btn:
+//                        Context context = getApplicationContext();
+//                        CharSequence text = "Whyyy";
+//                        int duration = Toast.LENGTH_SHORT;
+//                        Toast toast = Toast.makeText(context, text, duration);
+//                        toast.show();
+//                        logout();
+//                        return true;
+//                    default:
+//                        return MainActivity.super.onNavigateUp();
+//                }
+//            }
+//        });
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -146,6 +105,13 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+
+    }
+
+    private void nextShowMajorCourse(){
+        Intent intent = new Intent(MainActivity.this, ShowMajorCourse.class);
+        startActivity(intent);
 
     }
 

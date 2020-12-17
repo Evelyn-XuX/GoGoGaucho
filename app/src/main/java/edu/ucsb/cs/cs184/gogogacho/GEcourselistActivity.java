@@ -29,7 +29,6 @@ public class GEcourselistActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private DatabaseReference database;
 
-    private ArrayList<String> mMajorCourse;
     ExpandableListView expandableListView;
     List<String> listGroup;
     HashMap<String, List<Course>> listItem;
