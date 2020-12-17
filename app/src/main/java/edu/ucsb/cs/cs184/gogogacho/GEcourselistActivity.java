@@ -73,6 +73,11 @@ public class GEcourselistActivity extends AppCompatActivity {
 
                 Course selected_course = (Course) adapter.getChild(groupPosition,childPosition);
                 selected_course.setTaken(!selected_course.getTaken());
+                if(selected_course.getTaken()){
+                    v.setBackgroundColor(getColor(R.color.purple_500));
+                }else{
+                    v.setBackgroundColor(getColor(R.color.white));
+                }
                 FirebaseUser user = auth.getCurrentUser();
                 String userId = user.getUid();
                 database.child("users").child(userId).setValue(student);
@@ -80,6 +85,7 @@ public class GEcourselistActivity extends AppCompatActivity {
             }
         });
     }
+
     private void initListData(){
         student.mapListGroup_GE(listGroup);
         if(student.getCollege().equals("College of Engineering")) {
