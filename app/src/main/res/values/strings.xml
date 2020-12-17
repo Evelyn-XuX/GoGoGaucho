@@ -82,7 +82,7 @@
     <string name="welcome">Hello, Student</string>
     <string name="social_science">Social Science</string>
     <string name="area_d">Area D</string>
-    <string name="completed">Completed</string>
+    <string name="completed">Incomplete</string>
     <string name="rocket_launch">Rocket Launch</string>
     <string name="enter_button">Enter Button</string>
     <string name="area_icon">Area Icon</string>
@@ -95,7 +95,7 @@
     <string name="major_courses">Major Courses</string>
     <string name="major_electives">Major Electives</string>
     <string name="you_have_completed">You have completed</string>
-    <string name="_123">123</string>
+    <string name="_123">0</string>
     <string name="units">units</string>
 
     <string name="ge_title">Please select General Education courses taken</string>

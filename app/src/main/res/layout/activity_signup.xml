@@ -9,7 +9,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout4"
         android:layout_width="300dp"
-        android:layout_height="56dp"
+        android:layout_height="65dp"
         android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,14 +22,14 @@
             android:layout_height="match_parent"
             android:hint="@string/enter_email"
             android:inputType="textEmailAddress"
-            android:textSize="18sp" />
+            android:textSize="14sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout3"
         android:layout_width="300dp"
-        android:layout_height="56dp"
+        android:layout_height="65dp"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +43,7 @@
             android:autofillHints=""
             android:hint="@string/enter_password"
             android:inputType="textPassword"
-            android:textSize="18sp" />
+            android:textSize="14sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
