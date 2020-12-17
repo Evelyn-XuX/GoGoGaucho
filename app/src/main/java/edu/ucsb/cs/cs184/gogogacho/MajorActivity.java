@@ -67,6 +67,9 @@ public class MajorActivity extends AppCompatActivity {
                  */
                 final String selected_major = (String) adapter.getChild(groupPosition,childPosition);
                 final String selected_college = (String) adapter.getGroup(groupPosition);
+
+                v.setBackgroundColor(getColor(R.color.purple_500));
+
                 Log.d("selected major",selected_major);
 
                 FirebaseUser user = auth.getCurrentUser();
