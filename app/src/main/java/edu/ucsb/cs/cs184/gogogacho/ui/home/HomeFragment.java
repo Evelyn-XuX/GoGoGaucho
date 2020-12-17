@@ -12,11 +12,17 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import org.w3c.dom.Text;
+
 import edu.ucsb.cs.cs184.gogogacho.R;
 
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
+    private TextView units;
+    private TextView mCourses;
+    private TextView mElectives;
+    private boolean complete;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -30,6 +36,14 @@ public class HomeFragment extends Fragment {
 //                textView.setText(s);
 //            }
 //        });
+        units = root.findViewById(R.id.textView20);
+        mCourses = root.findViewById(R.id.textView29);
+        mElectives = root.findViewById(R.id.textView28);
+
+
+
         return root;
     }
+
+
 }
