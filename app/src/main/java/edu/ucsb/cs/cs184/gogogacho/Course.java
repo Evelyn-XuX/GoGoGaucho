@@ -1,6 +1,8 @@
 package edu.ucsb.cs.cs184.gogogacho;
 
-public class Course {
+import java.io.Serializable;
+
+public class Course implements Serializable {
     private String ClassName;
     private int id;
     private boolean taken;

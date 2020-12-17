@@ -90,7 +90,7 @@ public class CourseAdapter extends BaseExpandableListAdapter {
             }
 
             TextView textView = convertView.findViewById(R.id.list_child);
-            textView.setText(child.getClassName() + child.getId());
+            textView.setText(child.getClassName());
 
 //        textView.setOnClickListener(new View.OnClickListener() {
 //            @Override

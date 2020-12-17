@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         context =this;
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance().getReference();
@@ -68,25 +67,25 @@ public class MainActivity extends AppCompatActivity {
         database.child("users").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String userId = auth.getCurrentUser().getUid();
-                String college = snapshot.child(auth.getUid()).child("college").getValue(String.class);
-                Log.v("read",college);
-                if(college.equals("College of Engineering")) {
-                    student = snapshot.child(userId).getValue(COEstudent.class);
-                }else if(college.equals("College of Creative Study")){
-                    student = snapshot.child(userId).getValue(User.class);
-                }else if(college.equals("College of Letters and Science")){
-                    student = snapshot.child(userId).getValue(User.class);
-                }else{
-                    User temp = snapshot.child(userId).getValue(User.class);
-                }
-                Log.v("read", student.getEmail());
-                Log.v("read", student.majorRequiredCourses.get(0).toString());
-                Log.v("read", String.valueOf(student.majorRequiredCourses.get(0).getTaken()));
-                Log.v("read", student.majorRequiredCourses.get(1).toString());
-                Log.v("read", String.valueOf(student.majorRequiredCourses.get(1).getTaken()));
-                Log.v("read", student.majorRequiredCourses.get(2).toString());
-                Log.v("read", String.valueOf(student.majorRequiredCourses.get(2).getTaken()));
+//                String userId = auth.getCurrentUser().getUid();
+//                String college = snapshot.child(auth.getUid()).child("college").getValue(String.class);
+//                Log.v("read",college);
+//                if(college.equals("College of Engineering")) {
+//                    student = snapshot.child(userId).getValue(COEstudent.class);
+//                }else if(college.equals("College of Creative Study")){
+//                    student = snapshot.child(userId).getValue(User.class);
+//                }else if(college.equals("College of Letters and Science")){
+//                    student = snapshot.child(userId).getValue(User.class);
+//                }else{
+//                    User temp = snapshot.child(userId).getValue(User.class);
+//                }
+//                Log.v("read", student.getEmail());
+//                Log.v("read", student.majorRequiredCourses.get(0).toString());
+//                Log.v("read", String.valueOf(student.majorRequiredCourses.get(0).getTaken()));
+//                Log.v("read", student.majorRequiredCourses.get(1).toString());
+//                Log.v("read", String.valueOf(student.majorRequiredCourses.get(1).getTaken()));
+//                Log.v("read", student.majorRequiredCourses.get(2).toString());
+//                Log.v("read", String.valueOf(student.majorRequiredCourses.get(2).getTaken()));
             }
 
             @Override
@@ -120,23 +119,23 @@ public class MainActivity extends AppCompatActivity {
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
-//        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                switch (item.getItemId()) {
-//                    case R.id.logout_btn:
-//                        Context context = getApplicationContext();
-//                        CharSequence text = "Whyyy";
-//                        int duration = Toast.LENGTH_SHORT;
-//                        Toast toast = Toast.makeText(context, text, duration);
-//                        toast.show();
-//                        logout();
-//                        return true;
-//                    default:
-//                        return MainActivity.super.onNavigateUp();
-//                }
-//            }
-//        });
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.logout_btn:
+                        Context context = getApplicationContext();
+                        CharSequence text = "Whyyy";
+                        int duration = Toast.LENGTH_SHORT;
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                        logout();
+                        return true;
+                    default:
+                        return MainActivity.super.onNavigateUp();
+                }
+            }
+        });
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -147,7 +146,6 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-
 
     }
 

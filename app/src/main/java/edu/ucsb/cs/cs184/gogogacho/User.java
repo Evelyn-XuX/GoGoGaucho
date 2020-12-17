@@ -1,10 +1,11 @@
 package edu.ucsb.cs.cs184.gogogacho;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class User {
+public class User implements Serializable{
 
     private final static int unit = 182;
     public String email;
@@ -62,7 +63,9 @@ public class User {
     public List<Course> getGeCourses(){return geCourses;}
 
     public void mapListGroup(List<String> listGroup){}
+    public void mapListGroup_GE(List<String> listGroup){}
     public void mapListItem(HashMap<String, List<Course>> listItem){}
+    public void mapListItem_GE(HashMap<String, List<Course>> listItem){}
     public boolean noCourse(){return this.majorRequiredCourses.size() == 0;}
 
 }

@@ -1,10 +1,11 @@
 package edu.ucsb.cs.cs184.gogogacho;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class COEstudent extends User {
+public class COEstudent extends User{
     //private static int majorRequiredUnit;
     private static int majorElective = 7;
     private static int scienceElective = 2;
@@ -27,6 +28,13 @@ public class COEstudent extends User {
     public COEstudent(){
         super();
         scienceElectiveCourses = new ArrayList<>();
+
+        geAreaA1 = new ArrayList<>();
+        geAreaA2 = new ArrayList<>();
+        geAreaD = new ArrayList<>();
+        geAreaE = new ArrayList<>();
+        geAreaF = new ArrayList<>();
+        geAreaG = new ArrayList<>();
     }
 
     public COEstudent(String email, String college, String major, List<Course> majorRequiredCourses,
@@ -59,6 +67,26 @@ public class COEstudent extends User {
         listGroup.add("Major Require");
         listGroup.add("Major Elective");
         listGroup.add("Science Elective");
+    }
+
+    @Override
+    public void mapListGroup_GE(List<String> listGroup) {
+        listGroup.add("AREA A1");
+        listGroup.add("AREA A2");
+        listGroup.add("AREA D");
+        listGroup.add("AREA E");
+        listGroup.add("AREA F");
+        listGroup.add("AREA G");
+    }
+
+    @Override
+    public void mapListItem_GE(HashMap<String, List<Course>> listItem) {
+        listItem.put("AREA A1", this.geAreaA1);
+        listItem.put("AREA A2", this.geAreaA2);
+        listItem.put("AREA D", this.geAreaD);
+        listItem.put("AREA E", this.geAreaE);
+        listItem.put("AREA F", this.geAreaF);
+        listItem.put("AREA G", this.geAreaG);
     }
 
     @Override
