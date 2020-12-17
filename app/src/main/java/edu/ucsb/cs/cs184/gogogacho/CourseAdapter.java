@@ -21,16 +21,10 @@ public class CourseAdapter extends BaseExpandableListAdapter {
         List<String> listGroup;
         HashMap<String,List<Course>> listItem;
 
-        private FirebaseAuth auth;
-        private DatabaseReference database;
-
         public CourseAdapter(Context context, List<String> listGroup,HashMap<String, List<Course>> listItem){
             this.context=context;
             this.listGroup=listGroup;
             this.listItem=listItem;
-            auth = FirebaseAuth.getInstance();
-            database = FirebaseDatabase.getInstance().getReference();
-
         }
 
         @Override
@@ -100,7 +94,6 @@ public class CourseAdapter extends BaseExpandableListAdapter {
             textView.setText(child.getClassName());
 
             return convertView;
-
         }
 
         @Override
