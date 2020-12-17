@@ -28,14 +28,12 @@ import edu.ucsb.cs.cs184.gogogacho.ui.home.HomeFragment;
 public class GEcourselistActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private DatabaseReference database;
-
     ExpandableListView expandableListView;
     List<String> listGroup;
     HashMap<String, List<Course>> listItem;
     CourseAdapter adapter;
     private User student;
     private String college;
-
     private Button next;
 
     @Override
@@ -61,9 +59,6 @@ public class GEcourselistActivity extends AppCompatActivity {
         }else{
             student = (COEstudent)getIntent().getSerializableExtra("student");
         }
-
-        Log.v("read", student.getEmail());
-        Log.v("read", String.valueOf( student.getMajorRequiredCourses().size()));
 
         initListData();
         expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
@@ -151,6 +146,9 @@ public class GEcourselistActivity extends AppCompatActivity {
 
     private void nextHome(){
         Intent intent = new Intent(GEcourselistActivity.this, MainActivity.class);
+        FirebaseUser user = auth.getCurrentUser();
+        String userId = user.getUid();
+        database.child("users").child(userId).setValue(student);
         startActivity(intent);
         finish();
     }

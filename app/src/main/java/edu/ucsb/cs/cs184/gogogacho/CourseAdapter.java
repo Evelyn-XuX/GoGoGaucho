@@ -1,6 +1,7 @@
 package edu.ucsb.cs.cs184.gogogacho;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,22 +91,13 @@ public class CourseAdapter extends BaseExpandableListAdapter {
             }
 
             TextView textView = convertView.findViewById(R.id.list_child);
-            textView.setText(child.getClassName());
 
-//        textView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                /*
-//                TODO: (OPTIONAL) change background color when click
-//                */
-//                FirebaseUser user = auth.getCurrentUser();
-//                String email = user.getEmail();
-//                database.child("users").child(user.getUid()).child("major").setValue(child);
-//                Intent intent = new Intent(context, McourselistActivity.class);
-//                context.startActivities(new Intent[]{intent});
-//
-//            }
-//        });
+            if(child.getTaken()){
+                convertView.setBackgroundColor(Color.parseColor("#EAECF5"));
+            }else{
+                convertView.setBackgroundColor(Color.parseColor("#FFFFFFFF"));
+            }
+            textView.setText(child.getClassName());
 
             return convertView;
 
